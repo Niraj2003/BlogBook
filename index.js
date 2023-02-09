@@ -5,8 +5,6 @@ const mongoose = require('mongoose')
 
 const app = express();
 
-const homeStartingContent = "lll";
-
 mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true});
 
 app.set('view engine','ejs');
@@ -24,7 +22,6 @@ const Post = mongoose.model("Post", postSchema);
 app.get('/', function(req,res){
     Post.find({},function(err,posts){
         res.render("home",{
-            startingContent : homeStartingContent,
             posts: posts
         });
     });
