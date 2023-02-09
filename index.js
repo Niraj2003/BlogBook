@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 const postSchema = {
+    name : String,
     title: String,
     content : String
 };
@@ -33,12 +34,14 @@ app.get("/compose", function(req, res){
 
 app.post('/compose', function(req,res){
     const post = new Post({
+        name : req.body.name,
         title : req.body.postTitle,
         content : req.body.postBody
     });
 
     post.save(function(err){
         if(!err){
+            console.log("Post Added");
             res.redirect("/");
         }
     });
@@ -49,8 +52,9 @@ app.get("/posts/:postId", function(req,res){
 
     Post.findOne({_id:requestedPostId}, function(err,post){
         res.render("post",{
-            title:post.title,
-            content:post.content
+            name : post.name,
+            title: post.title,
+            content: post.content
         });
     });
 });
