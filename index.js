@@ -7,8 +7,8 @@ const app = express();
 
 const homeStartingContent = "lll";
 
-mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true});
-
+mongoose.connect("mongodb://127.0.0.1/blogDB", {useNewUrlParser: true});
+mongoose.set('strictQuery', true);
 app.set('view engine','ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -58,6 +58,6 @@ app.get("/posts/:postId", function(req,res){
     });
 });
 
-app.listen(3000, function(){
-    console.log("Server stated at 3000");
+app.listen(4000, function(){
+    console.log("Server stated at 4000");
 })
