@@ -12,7 +12,11 @@
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-        <p><%=post.content%></p>
+        <% if (post.content.length > 200) { %>
+          <p><%=post.content.substr(0,200)%> ... <a href="/posts/<%=post._id%>">read more</a> </p>
+        <% } else { %>
+          <p><%=post.content%></p>
+        <% } %>
         <footer class="blockquote-footer"><cite title="Source Title"><%=post.name%> </cite></footer>
       </blockquote>
     </div>

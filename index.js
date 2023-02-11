@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://Niraj:Niraj1234@cluster0.tuwjm3m.mongodb.net/blog", {useNewUrlParser: true});
 
 app.set('view engine','ejs');
 
