@@ -1,9 +1,6 @@
 body{
   margin: 5px;
 }
-.header{
-    /* background-color: aqua; */
-}
 .avatar{
   display: block;
   margin-left: auto;
@@ -13,23 +10,23 @@ body{
 }
 /* //content */
 .content{
-  margin-top: 70px;
+  margin-top: 5%;
 }
 label {
   display: block;
   text-align: center;
-  font: 1rem 'Fira Sans', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   
 }
 label,input {
-  margin: 2.4rem 0;
+  margin: 1.4rem 0;
 }
 #name{
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  height: 30px;
+  /* height: 30px; */
   box-shadow: rgb(77 72 72 / 35%) 0px 5px 15px;
   border-color: #ffffff;
   border-radius: 5px;
@@ -39,7 +36,7 @@ label,input {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  height: 40px;
+  /* height: 40px; */
   box-shadow: rgb(77 72 72 / 35%) 0px 5px 15px;
   border-color: #ffffff;
   border-radius: 5px;
@@ -54,3 +51,13 @@ label,input {
   border-color: #ffffff;
   border-radius: 5px;
 }
+
+.btn{
+  display: block;
+  margin: auto;
+  margin-top: 2%;
+  box-shadow: rgb(77 72 72 / 35%) 0px 5px 15px;
+  border-color: #ffffff;
+  border-radius: 5px;
+}
+
