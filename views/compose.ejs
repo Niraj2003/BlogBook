@@ -7,6 +7,11 @@
     <textarea name="postBody" id="" cols="30" rows="10"></textarea>
     <button type="submit">Post Blog</button>
 </form> -->
+<script>
+  function submitForm(){
+    alert("Post Added Successfully");
+  }
+</script>
 
 <div class="mx-5 my-5">
   <form action="/compose" method="post">
@@ -22,6 +27,6 @@
         <label for="exampleInputPassword1">Blog Content</label> <br>
         <textarea name="postBody" id="" placeholder="Blog Title" cols="100" rows="10"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Post Blog</button>
+      <button type="submit" class="btn btn-primary" onclick="submitForm()">Post Blog</button>
     </form>
 </div>

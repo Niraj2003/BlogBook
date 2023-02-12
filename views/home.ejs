@@ -13,7 +13,7 @@
   <div class="card-body">
     <blockquote class="blockquote mb-0">
         <% if (post.content.length > 200) { %>
-          <p><%=post.content.substr(0,200)%> ... <a href="/posts/<%=post._id%>">read more</a> </p>
+          <p><%=post.content.substr(0,200)%> ... <a href="/posts/<%=post._id%>" style="text-decoration: none;">read more</a> </p>
         <% } else { %>
           <p><%=post.content%></p>
         <% } %>
