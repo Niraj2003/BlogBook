@@ -1,12 +1,13 @@
 const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+require('dotenv').config();
 var isLogin = false;
 
 const app = express();
 
-mongoose.connect("mongodb+srv://Niraj:Niraj1234@cluster0.tuwjm3m.mongodb.net/blog", {useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE, {useNewUrlParser: true});
 
 app.set('view engine','ejs');
 
