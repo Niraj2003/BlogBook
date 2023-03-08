@@ -13,20 +13,61 @@
   }
 </script>
 
-<div class="mx-5 my-5">
-  <form action="/compose" method="post">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Name</label>
-        <input type="name" class="form-control" placeholder="name" name="name">
+
+<% if(!isLogin){ %>
+  <div >
+    <h3 class="position-absolute top-50 start-50 translate-middle">You have to login first to compose post</h3>
+  </div>
+<% } else { %>
+
+
+<div class="container mt-5">
+  <h1>Compose Post</h1>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Makes POST request to /login route -->
+          <form action="/compose" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="name" class="form-control" placeholder="Name" name="name">            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Blog Title</label>
+              <input type="text" class="form-control" placeholder="Blog Title" name="postTitle">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Blog Content</label> <br>
+              <textarea name="postBody" id="" placeholder="Blog Title" cols="110" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark">Post Blog</button>
+          </form>
+
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Blog Title</label>
-        <input type="text" class="form-control" placeholder="Blog Title" name="postTitle">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Blog Content</label> <br>
-        <textarea name="postBody" id="" placeholder="Blog Title" cols="100" rows="10"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" onclick="submitForm()">Post Blog</button>
-    </form>
-</div>
+    </div>
+
+
+
+
+<!-- 
+    <div class="mx-5 my-5">
+      <form action="/compose" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="name" class="form-control" placeholder="name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Blog Title</label>
+          <input type="text" class="form-control" placeholder="Blog Title" name="postTitle">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Blog Content</label> <br>
+          <textarea name="postBody" id="" placeholder="Blog Title" cols="100" rows="10"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="submitForm()">Post Blog</button>
+      </form>
+    </div> -->
+<% } %>
