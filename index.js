@@ -74,11 +74,20 @@ app.get("/login", function(req,res){
     res.render("login");
 });
 
+var loggedUser = {
+    name : "",
+    email : ""
+}
+
 app.post("/login", function(req, res){
     Users.findOne({email : req.body.email}, function(err, foundUser){
         if(foundUser.pass == req.body.password){
             isLogin = true;
-            res.send("Login Successfully");
+            loggedUser.name = foundUser.name;
+            loggedUser.email = foundUser.email;
+            console.log(loggedUser.name, loggedUser.email);
+            // res.send("Login Successfully");
+            res.render("temp", {message : "Login Successfully"});
         }
         else{
             res.send("Wrong ID and Password");
@@ -99,14 +108,29 @@ app.post("/register", function(req, res){
     });
     NewUser.save(function(err){
         if(!err){
-            console.log("Registered Successfully");
-            res.redirect("/");
+            res.render("temp", {message: "Registered Successfully"});
         }
     });
 })
 
+app.get("/logout", function(req,res){
+    if(isLogin) {
+        isLogin = false;
+        // res.send("LogOut Successfully");
+        res.render("temp", {message: "User Logout"});
+    }
+    else{
+        res.render("temp", {message: "Login First"});
+    }
+});
+
 app.get("/profile", function(req,res){
-    res.render("profile");
+    if(isLogin){
+        res.render("profile",{loggedUser});
+    }
+    else{
+        res.render("temp", {message: "User Not Logged in"})
+    }
 })
 
 app.listen(3000, function(){
