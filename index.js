@@ -64,8 +64,10 @@ app.get("/posts/:postId", function(req,res){
 
 const userSchma = {
     name : String,
+    userid : String,
     email : String, 
-    pass : String
+    pass : String,
+    passion : String
 };
 
 const Users = mongoose.model("Users", userSchma); 
@@ -76,7 +78,9 @@ app.get("/login", function(req,res){
 
 var loggedUser = {
     name : "",
-    email : ""
+    email : "",
+    passion : "",
+    userid : ""
 }
 
 app.post("/login", function(req, res){
@@ -85,15 +89,16 @@ app.post("/login", function(req, res){
             isLogin = true;
             loggedUser.name = foundUser.name;
             loggedUser.email = foundUser.email;
+            loggedUser.passion = foundUser.passion;
+            loggedUser.userid = foundUser.userid;
             console.log(loggedUser.name, loggedUser.email);
-            // res.send("Login Successfully");
             res.render("temp", {message : "Login Successfully"});
         }
         else{
             res.send("Wrong ID and Password");
-            // console.log(err);
         }
     })
+    
 })
 
 app.get("/register", function(req,res){
@@ -103,21 +108,22 @@ app.get("/register", function(req,res){
 app.post("/register", function(req, res){
     const NewUser = new Users({
         name : req.body.name,
+        userid : req.body.userid,
         email : req.body.email,
-        pass : req.body.password
+        pass : req.body.password,
+        passion : req.body.passion
     });
-    NewUser.save(function(err){
-        if(!err){
-            res.render("temp", {message: "Registered Successfully"});
-        }
-    });
+        NewUser.save(function(err){
+            if(!err){
+                res.render("temp", {message: "Registered Successfully"});
+            }
+        });
 })
 
 app.get("/logout", function(req,res){
     if(isLogin) {
         isLogin = false;
-        // res.send("LogOut Successfully");
-        res.render("temp", {message: "User Logout"});
+        res.render("temp", {message: "User Logouted"});
     }
     else{
         res.render("temp", {message: "Login First"});
