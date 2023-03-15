@@ -2,6 +2,7 @@ const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 var isLogin = false;
 
@@ -85,7 +86,8 @@ var loggedUser = {
 
 app.post("/login", function(req, res){
     Users.findOne({email : req.body.email}, function(err, foundUser){
-        if(foundUser.pass == req.body.password){
+        const hash = bcrypt.hashSync(req.body.password, 10);
+        if(bcrypt.compareSync(foundUser.pass, hash)){
             isLogin = true;
             loggedUser.name = foundUser.name;
             loggedUser.email = foundUser.email;
@@ -106,11 +108,12 @@ app.get("/register", function(req,res){
 })
 
 app.post("/register", function(req, res){
+    const hash = bcrypt.hashSync(req.body.password, 10);
     const NewUser = new Users({
         name : req.body.name,
         userid : req.body.userid,
         email : req.body.email,
-        pass : req.body.password,
+        pass : hash,
         passion : req.body.passion
     });
         NewUser.save(function(err){
