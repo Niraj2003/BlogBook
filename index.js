@@ -86,8 +86,8 @@ var loggedUser = {
 
 app.post("/login", function(req, res){
     Users.findOne({email : req.body.email}, function(err, foundUser){
-        const hash = bcrypt.hashSync(req.body.password, 10);
-        if(bcrypt.compareSync(foundUser.pass, hash)){
+        const hash1 = bcrypt.hashSync(req.body.password, 10);
+        if(bcrypt.compareSync(req.body.password, foundUser.pass)){
             isLogin = true;
             loggedUser.name = foundUser.name;
             loggedUser.email = foundUser.email;
@@ -108,12 +108,13 @@ app.get("/register", function(req,res){
 })
 
 app.post("/register", function(req, res){
-    const hash = bcrypt.hashSync(req.body.password, 10);
+    const hash2 = bcrypt.hashSync(req.body.password, 10);
+    console.log(hash2);
     const NewUser = new Users({
         name : req.body.name,
         userid : req.body.userid,
         email : req.body.email,
-        pass : hash,
+        pass : hash2,
         passion : req.body.passion
     });
         NewUser.save(function(err){
