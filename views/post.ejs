@@ -1,21 +1,69 @@
-<!-- <h1><%=title%></h1>
-<p><%=content%></p> -->
+<%- include('partials/header.ejs') %>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<style>
+  body {
+    background-color: #f9f9f9;
+  }
+  .card {
+    background-color: #ffffff;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+  }
+  .card-header {
+    background-color: #c2d8ff;
+    color: #ffffff;
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px;
+    font-size: 24px;
+  }
+  .card-body {
+    padding: 10px;
+    font-size: 18px;
+  }
+  blockquote {
+    border-left: 4px solid #c2d8ff;
+    padding-left: 10px;
+  }
+  .blockquote-footer {
+    color: #999999;
+    font-size: 14px;
+  }
+  a {
+    color: #0366d6;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Media Queries */
+  @media only screen and (max-width: 768px) {
+    .card {
+      margin: 10px;
+    }
+    .card-header {
+      font-size: 20px;
+    }
+    .card-body {
+      font-size: 16px;
+    }
+  }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<%- include('partials/header.ejs') %>
-<div class="card mx-5 my-3">
 
-    <div class="card-header">
-        <%=title%>
-    </div>
-
-    <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <pre style="width: 100%;
+<div class="card">
+  <div class="card-header">
+    <a href="/">
+      <%=title%></a>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+        <pre style="width: 100%;
           white-space: pre-wrap;
           word-wrap: break-word;"><%=content.toString()%></pre>
           <footer class="blockquote-footer"><cite title="Source Title"><%=name%> </cite></footer>
-        </blockquote>
+      </blockquote>
     </div>
-</div>
+  </div>

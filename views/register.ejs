@@ -1,44 +1,78 @@
-<%- include('partials/header') %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<%- include('partials/header', {style: '<link rel="stylesheet" href="/css/login.css">'} ) %>
 
 <div class="container mt-5">
-  <h1>Register</h1>
-
+  <h2>Register</h2>
   <div class="row">
-    <div class="col-sm-8">
-      <div class="card">
-        <div class="card-body">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-body">
 
-          <!-- Makes POST request to /register route -->
-          <form action="/register" method="POST">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input class="form-control" name="name">
-            </div>
-            <div class="form-group">
-              <label for="userid">User ID</label>
-              <input class="form-control" name="userid">
-            </div>
-            <div class="form-group">
-              <label for="passion">Passion</label>
-              <input class="form-control" name="passion">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" name="password">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-dark">Register</button>
-          </form>
-
-        </div>
+        <!-- Makes POST request to /register route -->
+        <form action="/register" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" name="name">
+          </div>
+          <div class="form-group">
+            <label for="userid">User ID</label>
+            <input class="form-control" name="userid">
+          </div>
+          <div class="form-group">
+            <label for="passion">Passion</label>
+            <input class="form-control" name="passion">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          <br>
+          <button type="submit" class="btn btn-dark">Register</button>
+        </form>
       </div>
     </div>
-
   </div>
+
 </div>
+<style>
+  body {
+    background-color: #f5f5f5;
+  }
+  h1 {
+    color: #212529;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.1);
+  }
+  .card-body {
+    padding: 2.5rem;
+  }
+  .form-group label {
+    color: #212529;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  .form-control {
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>

@@ -1,12 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <%- include('partials/header.ejs') %>
-<!-- <form action="/compose" method="post">
-    <input type="text" name="postTitle" placeholder="Enter title"> <br>
-
-    <textarea name="postBody" id="" cols="30" rows="10"></textarea>
-    <button type="submit">Post Blog</button>
-</form> -->
 <script>
   function submitForm(){
     alert("Post Added Successfully");
@@ -22,8 +15,7 @@
 
 
 <div class="container mt-5">
-  <h1>Compose Post</h1>
-
+  <h2>Compose Post</h2>
   <div class="row">
     <div class="col-sm-8">
       <div class="card">
@@ -48,26 +40,44 @@
         </div>
       </div>
     </div>
-
-
-
-
-<!-- 
-    <div class="mx-5 my-5">
-      <form action="/compose" method="post">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Name</label>
-          <input type="name" class="form-control" placeholder="name" name="name">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Blog Title</label>
-          <input type="text" class="form-control" placeholder="Blog Title" name="postTitle">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Blog Content</label> <br>
-          <textarea name="postBody" id="" placeholder="Blog Title" cols="100" rows="10"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" onclick="submitForm()">Post Blog</button>
-      </form>
-    </div> -->
+  </div>
+</div>
 <% } %>
+<style>
+  body {
+    background-color: #f5f5f5;
+  }
+  h1 {
+    color: #212529;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  .card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.1);
+  }
+  .card-body {
+    padding: 2.5rem;
+  }
+  .form-group label {
+    color: #212529;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  .form-control {
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
