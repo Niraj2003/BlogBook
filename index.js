@@ -1,27 +1,20 @@
 const express = require('express');
 const app = express();
-const bcrypt = require('bcrypt');
-const session = require('express-session')
+const session = require('express-session');
 
 require('dotenv').config();
 
 const db = require('./db/database');
-const User = require('./models/User.js')
 const port = 3000;
 
 const posts = require('./routes/posts');
 const users = require('./routes/users');
 
-const passport = require('passport');
-const methodOverride = require('method-override');
-const LocalStategy = require('passport-local');
-const { requireLogin } = require('./middleware');
-
 app.set("views", "views");
 app.set('view engine', 'ejs');
 
 const sessionConfig = {
-  secret: 'thisshouldbeabettersecret!',
+  secret: 'mynameisnirajamrutkar!',
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -33,9 +26,6 @@ const sessionConfig = {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sessionConfig))
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use("/",posts);
 app.use('/',users);
