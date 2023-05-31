@@ -1,147 +1,45 @@
 const express = require('express');
-const ejs = require('ejs');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-require('dotenv').config();
-var isLogin = false;
-
 const app = express();
+const bcrypt = require('bcrypt');
+const session = require('express-session')
 
-mongoose.connect(process.env.DATABASE, {useNewUrlParser: true});
+require('dotenv').config();
 
-app.set('view engine','ejs');
+const db = require('./db/database');
+const User = require('./models/User.js')
+const port = 3000;
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+const posts = require('./routes/posts');
+const users = require('./routes/users');
 
-const postSchema = {
-    name : String,
-    title: String,
-    content : String
-};
+const passport = require('passport');
+const methodOverride = require('method-override');
+const LocalStategy = require('passport-local');
+const { requireLogin } = require('./middleware');
 
-const Post = mongoose.model("Post", postSchema);
+app.set("views", "views");
+app.set('view engine', 'ejs');
 
-app.get('/', function(req,res){
-    Post.find({},function(err,posts){
-        res.render("home",{
-            posts: posts,
-        });
-    });
-});
-
-app.get("/compose", function(req, res){
-    res.render("compose", {isLogin});
-});
-
-app.post('/compose', function(req,res){
-    const post = new Post({
-        name : req.body.name,
-        title : req.body.postTitle,
-        content : req.body.postBody
-    });
-
-    post.save(function(err){
-        if(!err){
-            console.log("Post Added");
-            res.redirect("/");
-        }
-    });
-});
-
-app.get("/posts/:postId", function(req,res){
-    const requestedPostId = req.params.postId;
-
-    Post.findOne({_id:requestedPostId}, function(err,post){
-        res.render("post",{
-            name : post.name,
-            title: post.title,
-            content: post.content
-        });
-    });
-});
-
-const userSchma = {
-    name : String,
-    userid : String,
-    email : String, 
-    pass : String,
-    passion : String
-};
-
-const Users = mongoose.model("Users", userSchma); 
-
-app.get("/login", function(req,res){
-    res.render("login");
-});
-
-var loggedUser = {
-    name : "",
-    email : "",
-    passion : "",
-    userid : ""
+const sessionConfig = {
+  secret: 'thisshouldbeabettersecret!',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
 }
 
-app.post("/login", function(req, res){
-    Users.findOne({email : req.body.email}, function(err, foundUser){
-        const hash1 = bcrypt.hashSync(req.body.password, 10);
-        if(bcrypt.compareSync(req.body.password, foundUser.pass)){
-            isLogin = true;
-            loggedUser.name = foundUser.name;
-            loggedUser.email = foundUser.email;
-            loggedUser.passion = foundUser.passion;
-            loggedUser.userid = foundUser.userid;
-            console.log(loggedUser.name, loggedUser.email);
-            res.render("temp", {message : "Login Successfully"});
-        }
-        else{
-            res.send("Wrong ID and Password");
-        }
-    })
-    
-})
+app.use(express.urlencoded({ extended: true }));
+app.use(session(sessionConfig))
 
-app.get("/register", function(req,res){
-    res.render("register");
-})
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.post("/register", function(req, res){
-    const hash2 = bcrypt.hashSync(req.body.password, 10);
-    console.log(hash2);
-    const NewUser = new Users({
-        name : req.body.name,
-        userid : req.body.userid,
-        email : req.body.email,
-        pass : hash2,
-        passion : req.body.passion
-    });
-        NewUser.save(function(err){
-            if(!err){
-                res.render("temp", {message: "Registered Successfully"});
-            }
-        });
-})
+app.use("/",posts);
+app.use('/',users);
 
-app.get("/logout", function(req,res){
-    if(isLogin) {
-        isLogin = false;
-        res.render("temp", {message: "User Logouted"});
-    }
-    else{
-        res.render("temp", {message: "Login First"});
-    }
-});
+app.get('/', (req, res) => res.send('This is Homepage'))
 
-app.get("/profile", function(req,res){
-    if(isLogin){
-        res.render("profile",{loggedUser});
-    }
-    else{
-        res.render("temp", {message: "User Not Logged in"})
-    }
-})
-
-app.listen(3000, function(){
-    console.log("Server stated at 3000");
-})
+app.listen(port, () => console.log(`app listening on port ${port}!`))
